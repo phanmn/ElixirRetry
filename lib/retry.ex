@@ -268,6 +268,12 @@ defmodule Retry do
             else
               reraise e, __STACKTRACE__
             end
+        catch
+          :exit, reason ->
+            {:cont, {:exception, reason}}
+
+          e ->
+            reraise e, __STACKTRACE__
         end
       end
     end
